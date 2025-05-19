@@ -5,7 +5,7 @@ on:
 
 jobs:
   List_Changes:
-    name: checkout
+    name: List Changes
     runs-on: ubuntu-latest
     steps:
     - name: checkout

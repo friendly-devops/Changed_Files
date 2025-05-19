@@ -1,0 +1,23 @@
+name: "Changed Files"
+
+on:
+  push:
+
+jobs:
+  List_Changes:
+    name: checkout
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v3.3.0
+    - name: list changes
+      id: changed-files
+      run: |
+        response=$(curl -L -H "Accept: application/vnd.github+json"\
+        -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}"\
+        -H "X-GitHub-Api-Version: 2022-11-28"\
+        https://api.github.com/repos/${{ github.repository }}/commits/${{ github.sh }})
+        files=$(echo $response | jq -r .files[].filename)
+        echo "changed_files=$files" >> $GITHUB_OUTPUT
+    - name: retrieve changed files list
+      run: echo ${{ steps.chanded-files.outputs.changed_files }}

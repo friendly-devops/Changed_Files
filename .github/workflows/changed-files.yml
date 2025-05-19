@@ -21,4 +21,4 @@ jobs:
         files=$(echo $files | sed -e s/\\n/\\s/g)
         echo "changed_files=$files" >> $GITHUB_OUTPUT
     - name: retrieve changed files list
-      run: echo ${{ steps.chanded-files.outputs.changed_files }}
+      run: echo ${{ steps.changed-files.outputs.changed_files }}
